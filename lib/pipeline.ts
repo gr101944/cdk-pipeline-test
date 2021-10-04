@@ -8,7 +8,7 @@ import { ShellScriptAction } from '@aws-cdk/pipelines';
 /**
  * The stack that defines the application pipeline
  */
- export class CdkpipelinesDemoPipelineStack extends Stack {
+ export class CdkpipelinesDemoPipelineStack2 extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
       super(scope, id, props);
 
@@ -25,9 +25,9 @@ import { ShellScriptAction } from '@aws-cdk/pipelines';
         actionName: 'GitHub',
         output: sourceArtifact,
         oauthToken: SecretValue.secretsManager('github-token'),
-        owner: 'rajesh.ghosh.here@gmail.com',
-        repo: 'cdk-pipeline-test',
-        branch: 'main'
+        owner: 'gr101944',
+        repo: 'cdk-pipeline-test' ,
+        branch: 'main' 
       }),
 
       // How it will be built and synthesized
@@ -39,6 +39,10 @@ import { ShellScriptAction } from '@aws-cdk/pipelines';
         buildCommand: 'npm run build'
       }),
    });
+
+   const preprod = new CdkpipelinesDemoStage(this, 'PreProd', {
+    env: { account: '333490196116', region: 'us-east-1' }
+  });
 
   }
 }
